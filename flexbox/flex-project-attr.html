@@ -5,6 +5,10 @@
         <title>理解flexbox - Flex项目属性</title>
 
         <style>
+            h2 {
+                padding: 0;
+                margin: 0;
+            }
             div {
                 margin: 0;
                 padding: 0;
@@ -21,7 +25,7 @@
 
             li {
                 width: 100px;
-                height: 100px;
+                /* height: 100px; */
                 background-color: #8cacea;
                 margin: 8px;
                 padding: 4px;
@@ -35,8 +39,22 @@
             }
 
             .grow-ul li {
-                flex-grow: 1;   /* 是否填充 */
+                flex-grow: 1;   /* 是否填充并设置填充大小 */
                 flex-shrink: 1; /* 占据大小 */
+            }
+            .basis-ul li {
+                flex-basis: 150px; /* 默认值为auto; Flex项目宽度的计算是基于内容的多少来自动计算 */
+            }
+            .flex-ul li {
+                flex: 0 1 auto;  /* 第一个是flex-grow的值，第二个是flex-shrink，第三个是flex-basis的值 */
+            }
+            .align-self-ul {
+                height: 300px;
+                align-items: flex-start;
+            }
+            .align-self-ul li:nth-child(1) {
+                align-self: baseline;   /* auto 默认值 || flex-start || flex-end || center || baseline || stretch 所有值
+                                            垂直的对齐方式*/
             }
         </style>
     </head>
@@ -44,7 +62,7 @@
     <body>
         <!-- 所有项目属性 order || flex-grow || flex-shrink || flex-basis -->
         <div>
-            <h1>order</h1>
+            <h2>order</h2>
             <ul class="order-ul">
                 <li>1</li>
                 <li>2</li>
@@ -54,19 +72,32 @@
         </div>
 
         <div>
-            <h1>flex-grow 和 flex-shrink</h1>
+            <h2>flex-grow 和 flex-shrink</h2>
             <ul class="grow-ul">
                 <li>1</li>
             </ul>
         </div>
 
         <div>
-            <h1>flex-grow 和 flex-shrink</h1>
-            <ul class="order-ul">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
+            <h2>flex-basis</h2>
+            <ul class="basis-ul">
+                <li>打发发芬打粉色而非其他人其他</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>flex速记</h2>
+            <ul class="flex-ul">
+                <li>打发发芬打粉色而非其他人其他</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>align-self</h2>
+            <ul class="align-self-ul">
+                <li>i am list 1</li>
+                <li>i am list 2</li>
+                <li>i am list 3</li>
             </ul>
         </div>
     </body>
