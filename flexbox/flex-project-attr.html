@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>理解flexbox - Flex项目属性</title>
+
+        <style>
+            div {
+                margin: 0;
+                padding: 0;
+                border: 1px solid #8cacea;
+            }
+            div + div {margin-top: 20px;}
+            ul {
+                list-style: none;
+                border: 1px solid red;
+                padding: 0;
+                background-color: #e8e8e9;
+                display: flex;
+            }
+
+            li {
+                width: 100px;
+                height: 100px;
+                background-color: #8cacea;
+                margin: 8px;
+                padding: 4px;
+            }
+
+            .order-ul li:nth-child(1) {
+                order: 1;   /* 把他设置在最后，跟z-index原理一样。数字最大的在最后，然后往前排 */
+            }
+            .order-ul li:nth-child(3) {
+                order: 1;   /* 当值一样时，基于html源文件的位置进行排序 */
+            }
+
+            .grow-ul li {
+                flex-grow: 1;   /* 是否填充 */
+                flex-shrink: 1; /* 占据大小 */
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 所有项目属性 order || flex-grow || flex-shrink || flex-basis -->
+        <div>
+            <h1>order</h1>
+            <ul class="order-ul">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+
+        <div>
+            <h1>flex-grow 和 flex-shrink</h1>
+            <ul class="grow-ul">
+                <li>1</li>
+            </ul>
+        </div>
+
+        <div>
+            <h1>flex-grow 和 flex-shrink</h1>
+            <ul class="order-ul">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </body>
+</html>
