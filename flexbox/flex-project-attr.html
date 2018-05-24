@@ -56,6 +56,12 @@
                 align-self: baseline;   /* auto 默认值 || flex-start || flex-end || center || baseline || stretch 所有值
                                             垂直的对齐方式*/
             }
+            .flex-test-ul li:first-child {
+                flex: 1;
+            }
+            .flex-test-ul li:nth-child(2) {
+                flex: 3;
+            }
         </style>
     </head>
 
@@ -98,6 +104,13 @@
                 <li>i am list 1</li>
                 <li>i am list 2</li>
                 <li>i am list 3</li>
+            </ul>
+        </div>
+        <div>
+            <h2>flex</h2>
+            <ul class="flex-test-ul">
+                <li>i am list 1</li>
+                <li>i am list 2</li>
             </ul>
         </div>
     </body>
