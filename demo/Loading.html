@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>使用三角函数实现Loading效果</title>
+    </head>
+    <body>
+        <svg width="300" height="150">
+            <circle id="cLeft" cx="120" cy="75" r="10"></circle>
+            <circle id="cCenter" cx="150" cy="75" r="10"></circle>
+            <circle id="cRight" cx="180" cy="75" r="10"></circle>
+        </svg>
+
+        <script type="text/javascript">
+            let cLeft = document.querySelector('#cLeft'),
+                cCenter = document.querySelector('#cCenter'),
+                cRight = document.querySelector('#cRight');
+            let currentAnimationTime = 0;   // 动画时间
+            const centreY = 75;     // 初始 Y 坐标
+            const amplitude = 20;
+            animate();
+            function animate() {
+                cLeft.setAttribute('cy',
+                centreY + (amplitude * (Math.sin(currentAnimationTime))));   // 设置y坐标，实现上下跳动
+                cCenter.setAttribute('cy',
+                centreY + (amplitude * (Math.sin(currentAnimationTime - 1))));
+                cRight.setAttribute('cy',
+                centreY + (amplitude * (Math.sin(currentAnimationTime - 2))));
+
+                console.log(222);
+                currentAnimationTime += 0.15;   // 0.15是动画的速度
+                requestAnimationFrame(animate); // 在下一次重绘之前调用指定函数来更新动画。通常每秒60次
+            }
+        </script>
+    </body>
+</html>
