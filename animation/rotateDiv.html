@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>requestAnimationFrame - 使用rotate属性进行动画</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            #block {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 100px;
+                height: 100px;
+                margin: -50px 0 0 -50px;
+                background: #5C4FB4;
+                line-height: 100px;
+                text-align: center;
+                color: #fff;
+                cursor: pointer;
+                moz-user-select: -moz-none;
+                -moz-user-select: none;
+                -o-user-select:none;
+                -khtml-user-select:none;
+                -webkit-user-select:none;
+                -ms-user-select:none;
+                user-select:none;
+            }
+
+            .test {
+                width: 200px;
+                margin: 100px;
+            }
+
+            #button {
+                color: #fff;
+                border-radius: 5px;
+                background-color: #9ce8ed;
+                padding: 10px 20px;
+                border: 0;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test">
+            <button id="button">切换</button>
+            <p>
+                <span class="type">当前是自加</span>
+            </p>
+            <p>
+                <span class="speed">当前rotate值是0deg</span>
+            </p>
+        </div>
+
+        <div id="block">Click Me</div>
+
+        <script type="text/javascript">
+            let deg = 0;
+            let block = document.querySelector('#block'),
+                button = document.querySelector('#button'),
+                type = document.querySelector('.type'),
+                speed = document.querySelector('.speed');
+            let action = 'add';
+
+            block.addEventListener('click', function () {
+                let self = this;
+                requestAnimationFrame(function change() {
+                    if (action == 'add') {
+                        self.style.transform = `rotate(${deg++}deg)`;
+                    } else if (action == 'subtract') {
+                        self.style.transform = `rotate(${deg--}deg)`;
+                    }
+                    speed.innerHTML = `当前rotate值是${deg}deg`;
+                    requestAnimationFrame(change);
+                });
+            });
+
+            button.addEventListener('click', function () {
+                if (action == 'add') {
+                    action = 'subtract';
+                    type.innerHTML = '当前是自减';
+                } else if (action == 'subtract') {
+                    action = 'add';
+                    type.innerHTML = '当前是自加';
+                }
+            })
+        </script>
+    </body>
+</html>
