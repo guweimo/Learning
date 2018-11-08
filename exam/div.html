@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>布局</title>
+        <style media="screen">
+            * {margin: 0; padding: 0;}
+            .container {width: 1500px; margin: 0 auto;}
+            .header-green { background-color: green; height: 100px; }
+            .header-yellow { background-color: yellow; height: 200px;}
+            .footer-green { background-color: green; height: 100px; }
+            .footer-yellow { background-color: yellow; height: 200px; }
+            .content {}
+            .name {width: 700px; margin: 0 auto;}
+            .name::after, .content::before {content: " "; display: table;}
+            .name::after { clear: both; }
+            .name div { float: left; }
+            .left { height: 400px; width: 200px; background: pink; margin-right: 30px; }
+            .right {height: 400px; width: 400px; background: pink;}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header-green">
+                绿色
+            </div>
+            <div class="header-yellow">
+                黄色
+            </div>
+            <div class="content">
+                <div class="name">
+                    <div class="left">
+
+                    </div>
+                    <div class="right">
+
+                    </div>
+                </div>
+            </div>
+            <div class="footer-green">
+                绿色
+            </div>
+            <div class="footer-yellow">
+                黄色
+            </div>
+        </div>
+    </body>
+</html>

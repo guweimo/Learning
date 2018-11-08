@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>canvas - 技术点</title>
+        <style>
+            #canvas {
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="600"></canvas>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById('canvas');
+
+            if (canvas.getContext) {
+                var context = canvas.getContext('2d');
+
+                // 开始路径
+                context.beginPath();
+
+                // 绘制外圈
+                context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+
+                // 绘制内圈
+                context.moveTo(194, 100);
+                context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+
+                // 绘制分针
+                context.moveTo(100, 100);
+                context.lineTo(100, 15);
+
+                // 绘制时针
+                context.moveTo(100, 100);
+                context.lineTo(35, 100);
+
+                // 描边路径
+                context.stroke();
+
+                // 展示字体
+                context.font = "bold 12px Arial";   // 表示文本样式，大小及字体。
+                context.textAlign = "center";       // 表示文本对齐方式。('start', 'end', 'left', 'right', 'center');不要使用'left'和'right'。
+                context.textBaseline = "middle";    // 表示文本的基线。('top', 'hanging', middle', 'alphabetic', 'ideographic', 'bottom')
+                context.fillText('12', 100, 20);
+
+                // 起点对齐
+                context.textAlign = 'start';
+                context.fillText('12', 100, 40);
+
+                // 终点对齐
+                context.textAlign = 'end';
+                context.fillText('12', 100, 60);
+            }
+        </script>
+    </body>
+</html>

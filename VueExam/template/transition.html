@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>元素的过度</title>
+    <style>
+        /* ul {
+            list-style: none;
+        } */
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity .5s
+        }
+        .fade-enter, .fade-leave-active {
+          opacity: 0
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue">
+        <button v-on:click="show = !show">
+            Toggle
+        </button>
+        <transition name="fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#vue',
+            data: {
+                show: true,
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

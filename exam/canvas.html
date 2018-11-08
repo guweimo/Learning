@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>canvas - 技术点</title>
+        <style>
+            #canvas {
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="300" height="300"></canvas>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById('canvas');
+
+            if (canvas.getContext) {
+                var context = canvas.getContext('2d');
+
+                // 绘制红色矩形
+                context.fillStyle = '#ff0000';
+                context.fillRect(10, 10, 50, 50);
+
+                // 绘制半透明的蓝色矩形
+                context.fillStyle = 'rgba(0, 0, 255, 0.5)';
+                context.fillRect(30, 30, 50, 50);
+
+                // 在两个矩形重叠的地方清除一个小矩形
+                context.clearRect(40, 40, 10, 10);
+
+                // 绘制红色描边矩形
+                context.strokeStyle = '#ff0000';
+                // context.lineWidth = 2;   // 设置描边线条的宽度，设置所有的
+                // context.lineCap = 'square';   // 设置线条末端的形状是平头、圆头还是方头;('butt', 'round', 'square')
+                // context.lineJoin = 'miter';     //  设置线条相交的方式是圆头、斜交、还是斜接('round', 'bevel', 'miter')
+                context.strokeRect(80, 80, 50, 50);
+
+                // 绘制半透明的蓝色描边矩形
+                context.strokeStyle = 'rgba(0, 0, 255, 0.5)';
+                context.strokeRect(110, 110, 50, 50);
+            }
+        </script>
+    </body>
+</html>

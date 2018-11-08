@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>列表渲染</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue">
+        <ul>
+            <li v-for="item in items">
+                <p>{{ item.message }}</p>
+            </li>
+        </ul>
+        <div @click="test">235143515</div>
+        <p>Template v-for</p>
+        <ul>
+            <template v-for="item in items">
+                <li>{{ item.message }}</li>
+                <li class="divider">2</li>
+            </template>
+        </ul>
+        <p>组件</p>
+        <my-component
+            v-for="(item, index) in items"
+            :item="item"
+            :index="index">
+        </my-component>
+        <p>todo list 组件</p>
+        <input
+            v-model="newTodoText"
+            @keyup.enter="addNewTodo"
+            placeholder="Add a todo"
+        >
+        <ul>
+            <li
+              is="todo-item"
+              v-for="(todo, index) in todos"
+              :title="todo"
+              @remove="todos.splice(index, 1)"
+            ></li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('todo-item', {
+            template: '\
+            <li>\
+              {{ title }}\
+              <button v-on:click="$emit(\'remove\')">X</button>\
+            </li>\
+            ',
+            props: ['title']
+        })
+
+        Vue.component('my-component', {
+            template: '\
+            <li>\
+              {{ item.message }} - {{ index }}\
+            </li>\
+            ',
+            props: ['item', 'index']
+        })
+
+        var vm = new Vue({
+            el: '#vue',
+            data: {
+                items: [
+                    {
+                        message: 'foo'
+                    },
+                    {
+                        message: 'bar'
+                    },
+                ],
+                newTodoText: '',
+                todos: [
+                    'Do the dishes',
+                    'Take out the trash',
+                    'Mow the lawn'
+                ]
+            },
+            methods: {
+                test: function() {
+                    this.items = [
+                        {message: 'for'},
+                        {message: 'bartr'},
+                        {message: 'dsd'},
+                    ]
+                },
+                addNewTodo: function() {
+                    this.todos.push(this.newTodoText)
+                    this.newTodoText = ''
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

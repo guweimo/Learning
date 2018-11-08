@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数组的扩展</title>
+</head>
+
+<body>
+    <script>
+        let x = 32
+        const arr = [
+            ...(x > 0 ? ['a'] : []),
+            'b',
+        ];
+
+        const a = [1, 2, 3, 5, ];
+        const b = [...a];
+        const [...c] = b;
+        console.log(c);
+
+        function foo(x, y) {
+            var args = Array.from(arguments);
+            console.log(args);
+        }
+
+        foo(1, 2);
+
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length: 3
+        };
+
+        let arr2 = Array.from(arrayLike);
+        console.log('array.from', arr2);
+
+        // 数组实例的 entries()，keys() 和 values()
+        console.log('------------数组实例的 entries()，keys() 和 values()-------------');
+        for (let index of ['a', 'b'].keys()) {
+            console.log('数组的key', index);
+        }
+
+        for (let elem of ['a', 'b']) {
+            console.log('数组的value', elem);
+        }
+
+        for (let [index, elem] of ['a', 'b'].entries()) {
+            console.log('数组的entries', index, elem);
+        }
+
+        // 如果不使用for...of循环，可以手动调用遍历器对象的next方法，进行遍历。
+        let letter = ['a', 'b', 'c']
+        let entries = letter.entries();
+        console.log(entries.next().value);
+        console.log(entries.next().value);
+        console.log(entries.next().value);
+
+        // 数组实例的 includes()
+        console.log('------------includes-------------');
+        console.log([1, 2, 3].includes(2)); // true
+        console.log([1, 2, 3].includes(4)); // false
+        console.log([1, 2, NaN].includes(NaN)); // true
+
+        console.log('------------数组的空位-------------');
+        // forEach方法
+        [, 'a'].forEach((x, i) => console.log(i)); // 1
+
+        // filter方法
+        let filterVal = ['a', , 'b'].filter(x => true); // ['a','b']
+        console.log('filter方法', filterVal);
+
+        // every方法
+        let everyVal = [, 'a'].every(x => x === 'a'); // true
+        console.log('every方法', everyVal);
+
+        // reduce方法
+        let reduceVal = [1,,2].reduce((x,y) => x+y); // 3
+        console.log('reduce方法', reduceVal);
+
+        // some方法
+        let someVal = [, 'a'].some(x => x !== 'a'); // false
+        console.log('some方法', someVal);
+
+        // map方法
+        let mapVal = [, 'a'].map(x => 1); // [,1]
+        console.log('map方法', mapVal);
+
+        // join方法
+        let joinVal = [, 'a', undefined, null].join('#'); // "#a##"
+        console.log('join方法', joinVal);
+
+        // toString方法
+        let tostringVal = [, 'a', undefined, null].toString(); // ",a,,"
+        console.log('toString方法', tostringVal);
+    </script>
+</body>
+
+</html>

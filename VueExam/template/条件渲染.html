@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue">
+        <h1 v-if="sd">yes </h1>
+        <h1 v-else>no</h1>
+        <template v-if="sd">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#vue',
+            data: {
+                sd: false,
+            },
+        })
+    </script>
+</body>
+
+</html>

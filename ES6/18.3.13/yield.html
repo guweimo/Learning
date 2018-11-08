@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>yield</title>
+</head>
+
+<body>
+    <script>
+        function* fibs() {
+            let a = 0;
+            let b = 1;
+            while (true) {
+                yield a;
+                console.log(a, b);
+                [a, b] = [b, a + b];
+            }
+        }
+
+        let [first, second, third, fourth, fifth, sixth] = fibs();
+        sixth
+    </script>
+</body>
+
+</html>

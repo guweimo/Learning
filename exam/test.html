@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>测试</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" id="txt">
+        <p id="show-txt"></p>
+    </div>
+    <script>
+        var obj = {};
+        Object.defineProperty(obj, 'txt', {
+            get: function() {
+                return document.getElementById('txt').value;
+            },
+            set: function(newValue) {
+                if (newValue !== undefined) {
+                    document.getElementById('txt').value = newValue;
+                    document.getElementById('show-txt').innerHTML = newValue;
+                }
+
+            },
+            configurable: true
+        })
+
+        document.addEventListener('keyup', function(e) {
+            obj.txt = e.target.value;
+        })
+    </script>
+</body>
+
+</html>

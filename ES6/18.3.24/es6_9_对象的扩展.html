@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>对象的扩展</title>
+</head>
+
+<body>
+    <script>
+        var log = console.log.bind(console);
+        var mxtan = {
+            init(val) {
+                log(`------------------------${val}------------------------`);
+            },
+            one: function(...args) {
+                console.log('1.简洁表示法 ', ...args);
+            }
+        }
+        // 1. 属性的简洁表示法
+        mxtan.init('1. 属性的简洁表示法');
+        function f(x, y) {
+            return {x, y};
+        }
+
+        // 等同于
+
+        // function f(x, y) {
+        //     return {x: x, y: y};
+        // }
+
+        let val = f(1, 2) // Object {x: 1, y: 2}
+        log('属性的简写', val);
+
+        // 方法的简写
+        const o = {
+            method() {
+                return 'hello';
+            },
+        }
+
+        //等同于
+        // const o = {
+        //     method: function() {
+        //         return 'hello';
+        //     },
+        // }
+
+        // 实例
+        let birth = '2000/01/01';
+
+        const Person = {
+            name: '张三',
+            // 等同于birth:birth
+            birth,
+            // 等同于 hello: function() { log('我的名字是', this.name) }
+            hello () { log('我的名字是', this.name) },
+        }
+
+        mxtan.init('2. 属性名表达式');
+        var obj = {};
+        obj.foo = true;
+        // log('')
+        obj['a' + 'bc'] = 123;
+        log('obj', obj);
+        // es5
+        var obj3 = {
+          foo: true,
+          abc: 123
+        };
+
+        // es6 字面量定义对象，可以用表达式作为对象的属性名,即把表达式放在方括号内
+        let propKey = 'foo';
+        let obj2 = {
+            [propKey]: true,
+            ['a' + 'bc']: 123,
+        }
+        log('es6 obj2', obj2);
+
+        // 3. 方法的 name 属性
+        mxtan.init('3. 方法的 name 属性');
+        const person = {
+            sayName() {
+                console.log('hello!');
+            },
+        };
+        log(person.sayName.name) // "sayName"
+
+        // const obj4 = {
+        //   get foo() {},
+        //   set foo(x) {}
+        // };
+        //
+        // obj.foo.name
+        // // TypeError: Cannot read property 'name' of undefined
+        //
+        // const descriptor = Object.getOwnPropertyDescriptor(obj, 'foo');
+        //
+        // descriptor.get.name // "get foo"
+        // descriptor.set.name // "set foo"
+
+        // 5. Object.assign();
+        mxtan.init('5. Object.assign()');
+        let target = {a: 1, b: 2};
+        let source1  = {a: 3, b: 5};
+        let result = Object.assign(target, source1);
+        log('object.assign()', result);
+
+        let numObj = Object.assign(2);
+        log('Object.assign(2)', numObj);
+
+    </script>
+</body>
+
+</html>

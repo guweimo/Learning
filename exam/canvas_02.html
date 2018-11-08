@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>canvas - 变换</title>
+        <style>
+            #canvas {
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="600"></canvas>
+
+        <script type="text/javascript">
+            var canvas = document.getElementById('canvas');
+
+            if (canvas.getContext) {
+                var context = canvas.getContext('2d');
+
+                // 开始路径
+                context.beginPath();
+
+                // 绘制外圈
+                context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+
+                // 绘制内圈
+                context.moveTo(194, 100);
+                context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+
+                // 变换原点
+                context.translate(100, 100);
+
+                // 旋转表针
+                context.rotate(1);
+
+                // 绘制分针
+                context.moveTo(0, 0);
+                context.lineTo(0, -85);
+
+                // 绘制时针
+                context.moveTo(0, 0);
+                context.lineTo(-65, 0);
+
+                // 描边路径
+                context.stroke();
+            }
+        </script>
+    </body>
+</html>
