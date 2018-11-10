@@ -16,7 +16,6 @@
 <script>
 var log = console.log.bind(console)
 
-
 var imageFromPath = function(path) {
     var img = new Image()
     img.src = path
@@ -33,10 +32,18 @@ var Paddle = function() {
     }
     var paddle = o
     o.moveLeft = function() {
-        paddle.x -= paddle.speed
+        if (paddle.x - paddle.speed > 0) {
+            paddle.x -= paddle.speed
+        } else {
+            paddle.x = 0
+        }
     }
     o.moveRight = function() {
-        paddle.x += paddle.speed
+        if (paddle.x + paddle.speed + paddle.image.width < 400) {
+            paddle.x += paddle.speed
+        } else {
+            paddle.x = 400 - paddle.image.width
+        }
     }
     o.collide = function(ball) {
         if (ball.y + ball.image.height > o.y) {
@@ -217,8 +224,6 @@ var __main = function() {
                 game.drawImage(block)
             }
         }
-
-
     }
 
 }
