@@ -84,6 +84,10 @@ var Ball = function() {
             o.y += o.speedY
         }
     }
+    
+    o.bound = function() {
+        o.speedY *= -1
+    }
 
     return o
 }
@@ -117,10 +121,6 @@ var Block = function() {
     o.collide = function(b) {
         return o.alive && (rectIntersects(o, b) || rectIntersects(b, o))
     }
-
-    // o. = function() {
-    //
-    // }
 
     return o
 }
@@ -180,8 +180,8 @@ var __main = function() {
     var ball = Ball()
 
     var blocks = []
-    for (var i = 0; i < 3; i++) {
-        var b = Block()
+    for (let i = 0; i < 3; i++) {
+        let b = Block()
         b.x = i * 150
         b.y = 100
         blocks.push(b)
@@ -201,7 +201,8 @@ var __main = function() {
         ball.move()
         // 判断相撞
         if (paddle.collide(ball)) {
-            ball.speedY *= -1
+            // ball.speedY *= -1
+            ball.bound()
         }
 
         for (var i = 0; i < blocks.length; i++) {
@@ -210,6 +211,7 @@ var __main = function() {
             if (block.collide(ball)) {
                 block.kill()
                 // block.();
+                ball.bound()
             }
         }
     }
