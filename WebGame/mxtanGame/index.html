@@ -31,19 +31,36 @@ var Paddle = function() {
         speed: 10,
     }
     var paddle = o
-    o.moveLeft = function() {
-        if (paddle.x - paddle.speed > 0) {
-            paddle.x -= paddle.speed
-        } else {
-            paddle.x = 0
+    o.move = function(x) {
+        if (x < 0) {
+            x = 0
         }
+        if (x > 400 - o.image.width) {
+            x = 400 - o.image.width
+        }
+        o.x = x
+    }
+    o.moveLeft = function() {
+        // if (paddle.x - paddle.speed > 0) {
+        //     paddle.x -= paddle.speed
+        // } else {
+        //     paddle.x = 0
+        // }
+        // if (paddle.x < 0) {
+        //     paddle.x = 0
+        // }
+        o.move(paddle.x - paddle.speed)
     }
     o.moveRight = function() {
-        if (paddle.x + paddle.speed + paddle.image.width < 400) {
-            paddle.x += paddle.speed
-        } else {
-            paddle.x = 400 - paddle.image.width
-        }
+        // if (paddle.x + paddle.speed + paddle.image.width < 400) {
+        //     paddle.x += paddle.speed
+        // } else {
+        //     paddle.x = 400 - paddle.image.width
+        // }
+        // if (paddle.x > 400 - paddle.image.width) {
+        //     paddle.x = 400 - paddle.image.width
+        // }
+        o.move(paddle.x + paddle.speed)
     }
     o.collide = function(ball) {
         if (ball.y + ball.image.height > o.y) {
