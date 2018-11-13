@@ -87,6 +87,9 @@ var Ball = function() {
     o.fire = function() {
         o.fired = true
     }
+    o.stop = function() {
+        o.fired = false
+    }
     o.move = function() {
         if (o.fired) {
             // log('move')
@@ -212,6 +215,9 @@ var __main = function() {
     })
     game.registerAction('f', function() {
         ball.fire()
+    })
+    game.registerAction('p', function() {
+        ball.stop()
     })
 
     game.update = function() {
