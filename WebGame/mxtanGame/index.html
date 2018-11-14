@@ -117,15 +117,12 @@ var Block = function() {
         h: 20,
         alive: true,
     }
-
     o.kill = function() {
         o.alive = false
     }
-
     o.collide = function(b) {
         return o.alive && (rectIntersects(o, b) || rectIntersects(b, o))
     }
-
     return o
 }
 
@@ -187,10 +184,11 @@ var __main = function() {
     for (let i = 0; i < 3; i++) {
         let b = Block()
         b.x = i * 150
-        b.y = 100
+        b.y = 50
         blocks.push(b)
     }
 
+    var paused = false
     game.registerAction('a', function() {
         paddle.moveLeft()
     })
@@ -200,24 +198,29 @@ var __main = function() {
     game.registerAction('f', function() {
         ball.fire()
     })
-    game.registerAction('p', function() {
-        ball.stop()
+    window.addEventListener('keydown', function(event) {
+        if (event.key == 'p') {
+            paused = !paused
+        }
     })
 
     game.update = function() {
+        if (paused) {
+            return 
+        }
         ball.move()
         // 判断相撞
         if (paddle.collide(ball)) {
-            // ball.speedY *= -1
+            // 这里应该调用过一个 ball.bound() 来实现
             ball.bound()
         }
 
+        // 判断 ball 和 blocks 相撞
         for (var i = 0; i < blocks.length; i++) {
             var block = blocks[i]
             // 判断 ball 合 block 相撞
             if (block.collide(ball)) {
                 block.kill()
-                // block.();
                 ball.bound()
             }
         }
