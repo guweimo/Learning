@@ -1,14 +1,12 @@
 
-var Ball = function() {
-    var image = imageFromPath('ball.png')
-    var o = {
-        image: image,
-        x: 100,
-        y: 200,
-        speedX: 10,
-        speedY: 10,
-        fired: false,
-    }
+var Ball = function(game) {
+    var o = game.imageByName('ball')
+    // var image = imageFromPath('ball.png')
+    o.x = 100
+    o.y = 200
+    o.speedX = 10
+    o.speedY = 10
+    o.fired = false
     o.fire = function() {
         o.fired = true
     }
