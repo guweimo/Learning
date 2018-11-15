@@ -1,4 +1,6 @@
-var GuaGame = function() {
+var GuaGame = function(fps, loads) {
+    // loads 是一个数组，里面是图片的名字
+    // 程序会在所有图片载入成功后才运行
     var g = {
         actions: {},
         keydowns: {},
@@ -47,6 +49,13 @@ var GuaGame = function() {
             runloop()
         }, 1000/fps)
     }
+
+    // 预先载入所有图片
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        
+    }
+    // 开始运行程序
     setTimeout(function() {
         runloop()
     }, 1000/window.fps)

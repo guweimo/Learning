@@ -10,7 +10,7 @@ var Block = function(position) {
         w: 50,
         h: 20,
         alive: true,
-        lifes: p[2] || 1
+        lifes: p[2] || 1,
     }
     o.kill = function() {
         o.lifes--
