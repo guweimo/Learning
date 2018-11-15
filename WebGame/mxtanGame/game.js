@@ -48,7 +48,7 @@ var GuaGame = function(fps, images, runCallBack) {
         // next run loop
         setTimeout(function() {
             runloop()
-        }, 1000/fps)
+        }, 1000/window.fps)
     }
 
     // 
@@ -85,7 +85,7 @@ var GuaGame = function(fps, images, runCallBack) {
         // 开始运行程序
         setTimeout(function() {
             runloop()
-        }, 1000/window.fps)
+        }, 1000/fps)
     }
 
     return g
