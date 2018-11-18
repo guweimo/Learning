@@ -45,8 +45,8 @@ var __main = function() {
         paddle: 'img/paddle.png'
     }
     
-    var game = GuaGame(30, images, function(game) {
-        var s = SceneTitle(game)
+    var game = MxtanGame.instance(30, images, function(game) {
+        var s = SceneTitle.new(game)
         game.runWithScene(s)
     })
 

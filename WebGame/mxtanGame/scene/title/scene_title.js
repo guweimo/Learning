@@ -1,19 +1,13 @@
-var SceneTitle = function (game) {
-    var s = {
-        game: game,
+class SceneTitle extends MxtanScene {
+    constructor(game) {
+        super(game)
+        game.registerAction('k', function() {
+            var end = Scene(game)
+            game.replaceScene(end)
+        })
     }
-    game.registerAction('k', function() {
-        var end = Scene(game)
-        game.replaceScene(end)
-    })
-    // 初始化
-    s.draw = function () {
+    draw() {
         // draw labels
-        game.context.fillText('按 k 开始游戏', 100, 190)
+        this.game.context.fillText('按 k 开始游戏', 100, 190)
     }
-    s.update = function () {
-
-    }
-
-    return s
 }
