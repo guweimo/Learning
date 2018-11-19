@@ -1,15 +1,24 @@
 class Scene extends MxtanScene {
     constructor(game) {
         super(game)
-        this.bg = MxtanImage.new(game, 'sky')
-        // game.registerAction('k', function() {
-        //     var end = Scene(game)
-        //     game.replaceScene(end)
-        // })
+        this.setup()
     }
-    draw() {
-        // draw labels
-        this.game.drawImage(this.bg)
+    setup() {
+        let game = this.game
+        this.bg = MxtanImage.new(this.game, 'sky')
+        this.cloud = MxtanImage.new(this.game, 'cloud')
+
+        this.player = MxtanImage.new(this.game, 'player')
+        this.player.x = 100
+        this.player.y = 150
+        
+        this.addElement(this.bg)
+        this.addElement(this.player)
+        this.addElement(this.cloud)
+    }
+    update() {
+        this.cloud.y += 1
+        this.cloud.x += 1
     }
 }
 
