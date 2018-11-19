@@ -40,13 +40,14 @@ var enableDebugMode = function(game, enable) {
 var __main = function() {
     
     var images = {
-        ball: 'img/ball.png',
-        block: 'img/block.png',
-        paddle: 'img/paddle.png'
+        bullet: 'img/bullet.png',
+        cloud: 'img/cloud.png',
+        player: 'img/player.png',
+        sky: 'img/sky.png',
     }
     
     var game = MxtanGame.instance(30, images, function(game) {
-        var s = SceneTitle.new(game)
+        var s = Scene.new(game)
         game.runWithScene(s)
     })
 
