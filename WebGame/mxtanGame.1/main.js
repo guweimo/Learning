@@ -49,10 +49,12 @@ var __main = function() {
         enemy2: 'img/enemy2.png',
         enemy3: 'img/enemy3.png',
         enemy4: 'img/enemy4.png',
+        fire: 'img/fire.png',
     }
     
     var game = MxtanGame.instance(30, images, function(game) {
         var s = Scene.new(game)
+        // var s = SceneTitle.new(game)
         game.runWithScene(s)
     })
 

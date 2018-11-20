@@ -124,6 +124,9 @@ class Scene extends MxtanScene {
         this.addElement(this.player)
         //
         this.addEnemies()
+        // add particles
+        var ps = MxtanParticleSystem.new(this.game)
+        this.addElement(ps)
     }
     addEnemies() {
         let es = []

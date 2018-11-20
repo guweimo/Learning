@@ -13,9 +13,8 @@ class MxtanScene {
         this.elements.push(img)
     }
     draw() {
-        for (let i = 0; i < this.elements.length; i++) {
-            let e = this.elements[i]
-            this.game.drawImage(e)
+        for (let e of this.elements) {
+            e.draw()
         }
     }
     update() {
