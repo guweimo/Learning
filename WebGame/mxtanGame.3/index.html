@@ -27,46 +27,26 @@
     <script src="scene/title/scene_title.js"></script>
     <!-- 关卡数据 -->
     <script src="level.js"></script>
+    <!-- 配置文件 -->
+    <script src="config.js"></script>
 </head>
 
 <body>
     <canvas id="id-canvas" width="400" height="600"></canvas>
     <hr>
     <input id="id-input-speed" type="range" value="1">
-    <div class="">
+    <div class="mxtan-controls">
+        <!-- <div>
+            <label>
+                <input class="mxtan-auto-slider" type="range" value="" 
+                max="20"
+                data-value="config.player_speed">
+                玩家速度：<span class="mxtan-label"></span>
+            </label>
+        </div> -->
         <!-- <textarea id="id-text-log" cols="50" rows="20"></textarea> -->
     </div>
-    <div>
-        <label>
-            <input class="mxtan-auto-slider" type="range" value="" 
-            max="20"
-            data-value="config.player_speed">
-            玩家速度：<span class="mxtan-label"></span>
-        </label>
-    </div>
-    <div>
-        <label>
-            <input class="mxtan-auto-slider" type="range" value="" 
-            max="20"
-            data-value="config.bullet_speed">
-            bullet速度：<span class="mxtan-label"></span>
-        </label>
-    </div>
-    <div>
-        <label>
-            <input class="mxtan-auto-slider" type="range" value="" data-value="config.fire_cooldown">
-            子弹冷却时间速度：<span class="mxtan-label"></span>
-        </label>
-    </div>
-    <div>
-        <label>
-            <input class="mxtan-auto-slider" type="range" value="" 
-            min="-10"
-            min="10"
-            data-value="config.colud_speed">
-            colud速度：<span class="mxtan-label"></span>
-        </label>
-    </div>
+    
     <script src="main.js"></script>
     <script>
         var es = sel => document.querySelectorAll(sel)
@@ -80,15 +60,51 @@
             }
         }
 
-        bindAll('.mxtan-auto-slider', 'input', function(event) {
-            let target = event.target
-            let bindVar = target.dataset.value
-            let v = target.value
-            eval(bindVar + '=' + v)
+        var templateControl = function(key, item) {
+            let t = `
+                <div>
+                    <label>
+                        <input class="mxtan-auto-slider" type="range" 
+                        value="${item.value}" 
+                        max="500"
+                        data-value="config.${key}">
+                        ${item._comment}：<span class="mxtan-label"></span>
+                    </label>
+                </div>
+            `
+            return t
+        }
 
-            let label = target.closest('label').querySelector('.mxtan-label')
-            label.innerText = v
-        })
+        var insertControls = function() {
+            let div = e('.mxtan-controls')
+            let keys = Object.keys(config)
+            for (let k of keys) {
+                let item = config[k]
+                let html = templateControl(k, item)
+                div.insertAdjacentHTML('beforeend', html)
+            }
+        }
+    
+        let bindEvents = function() {
+            bindAll('.mxtan-auto-slider', 'input', function(event) {
+                let target = event.target
+                let bindVar = target.dataset.value
+                let v = target.value
+                eval(bindVar + '.value=' + v)
+
+                let label = target.closest('label').querySelector('.mxtan-label')
+                label.innerText = v
+            })
+        }
+
+        var __main = function() {
+            // 从配置文件中生成 HTML 控件
+            insertControls()
+            // 绑定事件
+            bindEvents()
+        }
+
+        __main()        
     </script>
 </body>
 
