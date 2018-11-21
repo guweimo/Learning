@@ -20,6 +20,7 @@ class MxtanAnimation {
         //
         this.flipX = false
         this.rotation = 0
+        this.alpha = 1
         // 重力和加速度
         this.gy = 10
         this.vy = 0
@@ -35,6 +36,10 @@ class MxtanAnimation {
         this.rotation = -45
     }
     update() {
+        // 更新 alpha
+        if (this.alpha > 0) {
+            this.alpha -= 0.05
+        }
         // 更新受力
         this.y += this.vy
         this.vy += this.gy * 0.2
@@ -65,6 +70,7 @@ class MxtanAnimation {
         if (this.flipX) {
             context.scale(-1, 1)
         }
+        context.globalAlpha = this.alpha
         context.rotate(this.rotation * Math.PI / 180)
         context.translate(-w2, -h2)
 
