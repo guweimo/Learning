@@ -81,6 +81,12 @@ var __main = function() {
         run8: 'img/player-run/player-run-8.png',
         run9: 'img/player-run/player-run-9.png',
         run10: 'img/player-run/player-run-10.png',
+        // flappy bird images
+        bg: 'img/bird/bg.png',
+        ground: 'img/bird/ground.png',
+        b1: 'img/bird/b1.png',
+        b2: 'img/bird/b2.png',
+        b3: 'img/bird/b3.png',
     }
     
     var game = MxtanGame.instance(30, images, function(game) {
