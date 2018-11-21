@@ -17,7 +17,7 @@ class SceneTitle extends MxtanScene {
         self.game.registerAction('a', function() {
             self.w.move(-2)
         })
-        self.game.registerAction('a', function() {
+        self.game.registerAction('d', function() {
             self.w.move(2)
         })
     }

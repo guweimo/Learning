@@ -26,7 +26,11 @@ class MxtanGame {
         return this.i
     }
     drawImage(img) {
-        this.context.drawImage(img.texture, img.x, img.y)
+        if (img.setSize) {
+            this.context.drawImage(img.texture, img.x, img.y, img.width, img.height)
+        } else {
+            this.context.drawImage(img.texture, img.x, img.y)
+        }
     }
     // update
     update() {
