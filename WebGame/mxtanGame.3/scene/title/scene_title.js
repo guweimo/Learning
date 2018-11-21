@@ -14,11 +14,11 @@ class SceneTitle extends MxtanScene {
     }
     setupInputs() {
         let self = this
-        self.game.registerAction('a', function() {
-            self.w.move(-2)
+        self.game.registerAction('a', function(keyStatus) {
+            self.w.move(-2, keyStatus)
         })
-        self.game.registerAction('d', function() {
-            self.w.move(2)
+        self.game.registerAction('d', function(keyStatus) {
+            self.w.move(2, keyStatus)
         })
     }
 }
