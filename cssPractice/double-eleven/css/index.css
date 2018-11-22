@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 html {
     box-sizing: border-box;
     font: 14px / 1.42857 "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,7 +23,6 @@ body {
     align-items: center;
     flex-wrap: wrap;
 }
-
 
 .gradient-border-test {
     border: 5px solid transparent;
