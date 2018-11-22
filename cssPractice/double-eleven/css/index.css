@@ -13,10 +13,16 @@ html {
     box-sizing: inherit;
 }
 
-.container {
+body {
     width: 100vw;
     height: 100vh;
+    padding: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
+
 
 .gradient-border-test {
     border: 5px solid transparent;
@@ -49,4 +55,115 @@ html {
     width: calc(100% + 5px * 2);
     background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);; border-radius: calc(2 * 5px);
     z-index: -1;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 290px;
+    height: 90px;
+    position: relative;
+    border-radius: 50px;
+    font-weight: 500;
+    border: 5px solid transparent;
+    color: #5e3700;
+    font-size: 32px;
+    margin: 20px;
+}
+
+.btn.btn-primary {
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.61);
+    box-shadow: inset 0 5px 15px 0 rgba(255, 255, 255, 0.4),
+        inset 0 10px 15px 0 rgba(255, 255, 255, 0.6),
+        0 2px 12px rgba(0, 0, 0, 0.35);
+    background-image: radial-gradient(
+            circle at 50% 0%,
+            #fff000 50%,
+            #ffcd00 100%
+        ),
+        linear-gradient(101deg, #ffc46d, #fa0055);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-outline {
+    color: #fff;
+    border: 5px solid #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.btn.btn-default {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #ff7c2d 3%, #ff016e 97%),
+        linear-gradient(to bottom, #fff3b3, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-secondary {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #ff005d 5%, #0066ff 98%),
+        linear-gradient(to bottom, #fff3b6, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-disabled {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #d0d0d0 5%, #bbb 98%),
+        linear-gradient(to bottom, #fff3b6, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-success {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #ffc600 6%, #04e199 94%),
+        linear-gradient(to bottom, #fff3b6, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-info {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #32a8ff 6%, #00ccb4 94%),
+        linear-gradient(to bottom, #d696bc, #cd4f5d);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.btn.btn-circle {
+    min-width: 90px;
+    max-width: 90px;
+    height: 90px;
+    font-size: 24px;
+    color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(-151deg, #17fef6 0%, #8417f9 100%),
+        linear-gradient(to bottom, #fff3b6, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+.btn.btn-circle span {
+    display: block;
+    text-align: center;
+}
+
+.btn.btn-group {
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-image: linear-gradient(to right, #17edfe 6%, #8417f9 94%),
+      linear-gradient(to bottom, #fff3b6, #e27d2c);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
 }
