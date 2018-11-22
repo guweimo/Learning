@@ -32,8 +32,8 @@ html {
 
 .gradient-border-test1 {
     border-radius: 5px;
-    width: calc(100% / 5);
-    height: calc(100% / 3);
+    width: calc(100% / 5 - 10px);
+    height: calc(100% / 3 - 10px);
     margin: 5px auto;
     background: #fff;
     position: relative;
