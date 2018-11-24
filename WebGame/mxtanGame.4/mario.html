@@ -6,12 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mxtanrio</title>
+    <style>
+        canvas {
+            border: 1px solid lightskyblue;
+        }
+    </style>
 </head>
 
 <body>
     <h3></h3>
-    <canvas id="id-canvas" width="640" height="640"></canvas>
-    <canvas id="id-canvas-sprite" width="160" height="320"></canvas>
+    <canvas id="id-canvas" 
+        data-action="draw_title" 
+        data-type="source" 
+        width="640" height="640"></canvas>
+    <canvas id="id-canvas-sprite" 
+        data-action="draw_title" 
+        data-type="tile" 
+        width="160" height="320"></canvas>
+    <canvas id="" 
+        data-action="draw_title" 
+        data-type="tile" 
+        width="160" height="160"></canvas>
+    <canvas id="" 
+        data-action="draw_title" 
+        data-type="tile" 
+        width="480" height="480"></canvas>
     <div class="mxtan-controls">
         <button data-action="change_offset" data-offset="-1024">-1024</button>
         <button data-action="change_offset" data-offset="-16">-16</button>
@@ -61,25 +80,27 @@
                     let c1 = (p1 >> (7 - j)) & 0b00000001
                     let c2 = (p2 >> (7 - j)) & 0b00000001
                     let pixel = (c2 << 1) + c1
-                    let color = colors[pixel]
-                    context.fillStyle = color
-                    let px = x + j * w
-                    let py = y + i * h
-                    context.fillRect(px, py, w, h)
-                }                
+                    if (pixel != 0) {
+                        let color = colors[pixel]
+                        context.fillStyle = color
+                        let px = x + j * w
+                        let py = y + i * h
+                        context.fillRect(px, py, w, h)
+                    }
+                }
             }
         }
 
-        const drawSprite = data => {
-            let context = e('#id-canvas-sprite').getContext('2d')
+        const drawSprite = (data, canvas, offsetX, offsetY, w, h) => {
+            let context = canvas.getContext('2d')
             let pixelsPerBlock = 8
             let pixelWidth = 10
             let blockSize = pixelsPerBlock * pixelWidth
             let offset = 0
-            for (let i = 0; i < 4; i++) {
-                for (let j = 0; j < 2; j++) {
-                    let x = j * blockSize
-                    let y = i * blockSize
+            for (let i = 0; i < h; i++) {
+                for (let j = 0; j < w; j++) {
+                    let x = (offsetX + j) * blockSize
+                    let y = (offsetY + i) * blockSize
                     let pixels = data.slice(offset)
                     drawBlock(context, pixels, x, y, pixelWidth)
                     offset += 16
@@ -93,11 +114,11 @@
             let canvas = e('#id-canvas')
             let context = canvas.getContext('2d')
 
-            let blockSize = 8   // 一个图块 8 像素
+            let blockSize = 8 // 一个图块 8 像素
             let pixelSize = 8
             let pixelWidth = 10
             let numberOfBytesPerBlock = 16
-            
+
             for (let i = 0; i < blockSize; i++) {
                 for (let j = 0; j < blockSize; j++) {
                     // 算出 bytes
@@ -105,23 +126,46 @@
                     let y = i * pixelSize * pixelWidth
                     let index = window.offset + (i * 8 + j) * numberOfBytesPerBlock
                     drawBlock(context, bytes.slice(index), x, y, pixelWidth)
-                }                
+                }
             }
         }
 
-        const actions = { 
-            change_offset(offset) {
+        const actions = {
+            change_offset(event) {
+                let offset = Number(event.target.dataset.offset)
                 window.offset += offset
                 e('h3').innerHTML = window.offset
                 drawNes(window.bytes)
-           },
+            },
+            draw_title(event) {
+                let target = event.target
+                let rect = target.getBoundingClientRect()
+                let bytesPerBlock = 16
+                let x = event.clientX - rect.left
+                let y = event.clientY - rect.top
+                let i = Math.floor(x / 80)
+                let j = Math.floor(y / 80)
+
+                let type = target.dataset.type
+                if (type == 'source') {
+                    let offset = i * bytesPerBlock + bytesPerBlock * 8 * j
+                    window.tileOffset = offset + window.offset
+                } else if (type == 'tile') {
+                    let data = window.bytes.slice(window.tileOffset)
+                    drawSprite(data, target, i, j, 1, 1)
+                }
+
+                log('draw tile', x, y, i, j)
+            },
         }
 
         const bindEvents = () => {
-            e('.mxtan-controls').addEventListener('click', event => {
+            e('body').addEventListener('click', event => {
+
+            })
+            e('body').addEventListener('click', event => {
                 let action = event.target.dataset.action
-                let offset = Number(event.target.dataset.offset)
-                actions[action] && actions[action](offset)
+                actions[action] && actions[action](event)
             })
             window.addEventListener('keydown', event => {
                 if (event.key = 'p') {
@@ -140,20 +184,20 @@
                     window.bytes = new Uint8Array(r)
                     log('bytes', bytes)
                     drawNes(bytes)
-                    let step = 0
-                    let bytesPerBlock = 16
-                    let tilesPerSprite = 8
-                    let bytesPerSprite = bytesPerBlock * tilesPerSprite
-                    setInterval(() => {
-                        let offset = tileOffset + step * bytesPerSprite
-                        drawSprite(bytes.slice(offset))
-                        if (window.paused) {
-                            // 暂停
-                        } else {
-                            step++
-                            step %= 4
-                        }
-                    }, 200);
+                    // let step = 0
+                    // let bytesPerBlock = 16
+                    // let tilesPerSprite = 8
+                    // let bytesPerSprite = bytesPerBlock * tilesPerSprite
+                    // setInterval(() => {
+                    //     let offset = tileOffset + step * bytesPerSprite
+                    //     drawSprite(bytes.slice(offset))
+                    //     if (window.paused) {
+                    //         // 暂停
+                    //     } else {
+                    //         step++
+                    //         step %= 4
+                    //     }
+                    // }, 200);
                 },
             }
             ajax(request)
