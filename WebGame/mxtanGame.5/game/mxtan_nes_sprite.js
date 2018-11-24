@@ -23,6 +23,9 @@ class MxtanNesSprite {
         // 重力和加速度
         this.gy = 10
         this.vy = 0
+        // 加速和摩擦
+        this.vx = 0
+        this.mx = 0
     }
     static new(game) {
         return new this(game)
@@ -87,6 +90,16 @@ class MxtanNesSprite {
         // this.rotation = -45
     }
     update() {
+        // 更新 x 加速和摩擦
+        this.vx += this.mx
+        // 说明摩擦力已经把速度降至 0 以下，停止摩擦
+        if (this.vx * this.mx > 0) {
+            this.vx = 0
+            this.mx = 0
+        } else {
+            this.x += this.vx
+        }
+
         // 更新受力
         this.y += this.vy
         this.vy += this.gy * 0.2
@@ -123,7 +136,14 @@ class MxtanNesSprite {
     }
     move(x, keyStatus) {
         this.flipX = x < 0
-        this.x += x
+        // this.x += x
+        let s = 0.2 * x
+        if (keyStatus == 'down') {
+            this.vx += s
+            this.mx = -s/3
+        } else {
+
+        }
         // let animationNames = {
         //     down: 'run',
         //     up: 'idle',

@@ -42,8 +42,8 @@ class SceneEditor extends MxtanScene {
     constructor(game) {
         super(game)
         // bg
-        let bg = MxtanImage.new(game, 'bg')
-        this.addElement(bg)
+        // let bg = MxtanImage.new(game, 'bg')
+        // this.addElement(bg)
         // tile map 
         let map = MxtanTileMap.new(game);
         this.addElement(map)
