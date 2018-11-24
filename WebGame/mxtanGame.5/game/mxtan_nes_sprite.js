@@ -90,7 +90,7 @@ class MxtanNesSprite {
         // 更新受力
         this.y += this.vy
         this.vy += this.gy * 0.2
-        let h = 476
+        let h = 100
         if (this.y > h) {
             this.y = h
         }

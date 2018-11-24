@@ -59,6 +59,11 @@ var __main = function() {
         b1: 'img/bird/b1.png',
         b2: 'img/bird/b2.png',
         b3: 'img/bird/b3.png',
+        //
+        t1: 'img/tiles/t1.png',
+        t2: 'img/tiles/t2.png',
+        t3: 'img/tiles/t3.png',
+        t4: 'img/tiles/t4.png',
     }
 
     let request = {
@@ -67,7 +72,8 @@ var __main = function() {
             window.bytes = new Uint8Array(r)
             var game = MxtanGame.instance(30, images, function(game) {
                 // var s = Scene.new(game)
-                var s = SceneTitle.new(game)
+                // var s = SceneTitle.new(game)
+                var s = SceneEditor.new(game)
                 game.runWithScene(s)
             })
         
