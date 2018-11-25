@@ -5,8 +5,14 @@
     <meta charset="utf-8">
     <title>MxtanGame 1</title>
     <style media="screen">
+        div {
+            outline: dashed lightskyblue 1px;
+        }
         canvas {
             border: 1px black solid;
+        }
+        .mxtan-inline-block {
+            display: inline-block;
         }
     </style>
     <!-- game 相关文件 -->
@@ -34,8 +40,14 @@
 </head>
 
 <body>
-    <canvas id="id-canvas" width="256" height="160"></canvas>
-    <!-- <canvas id="id-canvas" width="512" height="480"></canvas> -->
+    <!-- <canvas id="id-canvas" width="256" height="160"></canvas> -->
+    <canvas id="id-canvas" width="512" height="480"></canvas>
+    <div class="mxtan-inline-block">
+        <img data-action="change_active_tile" src="img/tiles/t1.png" data-id="t1">
+        <img data-action="change_active_tile" src="img/tiles/t2.png" data-id="t2">
+        <img data-action="change_active_tile" src="img/tiles/t3.png" data-id="t3">
+        <img data-action="change_active_tile" src="img/tiles/t4.png" data-id="t4">
+    </div>
     <hr>
     <input id="id-input-speed" type="range" value="1">
     <div class="mxtan-controls">
@@ -53,6 +65,7 @@
     <script src="main.js"></script>
     <script>
         var es = sel => document.querySelectorAll(sel)
+        var e = sel => document.querySelector(sel)
         var bindAll = function(sel, eventName, callback) {
             var l = es(sel)
             for (let i = 0; i < l.length; i++) {
@@ -87,6 +100,14 @@
                 div.insertAdjacentHTML('beforeend', html)
             }
         }
+
+        const actions = {
+            change_active_lite(event) {
+                let id = event.target.dataset.id
+                e('h3').innerHTML = window.offset
+                drawNes(window.bytes)
+            },
+        }
     
         let bindEvents = function() {
             bindAll('.mxtan-auto-slider', 'input', function(event) {
@@ -97,6 +118,11 @@
 
                 let label = target.closest('label').querySelector('.mxtan-label')
                 label.innerText = v
+            })
+            // change_active_lite
+            e('body').addEventListener('click', event => {
+                let action = event.target.dataset.action
+                actions[action] && actions[action](event)
             })
         }
 
