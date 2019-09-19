@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>三栏式布局</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .wrap {
+            width: 88%;
+            border: 1px solid red;
+            margin: auto;
+        }
+        .wrap > div {
+            height: 300px;
+        }
+
+        .left {
+            float: left;
+            width: 250px;
+            background-color: green;
+        }
+
+        .right {
+            float: right;
+            width: 250px;
+            background-color: blue;
+        }
+
+        .center {
+            overflow: hidden;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="center"></div>
+    </div>
+</body>
+</html>
